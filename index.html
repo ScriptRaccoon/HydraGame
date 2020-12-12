@@ -7,26 +7,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="form">
+    <header class="header">
         <div id="title">Hydra Game</div>
-        <div class="form-control">
-            <label>Height</label>
-            <input type="text" id="heightInput" value="5">
-        </div>
-        <div class="form-control">
-            <label>Maximal Children</label>
-            <input type="text" id="maxChildrenInput" value="3">
-        </div>
-        <div class="form-control">
-            <button class="btn" id="drawBtn">Draw Random Tree</button>
-        </div>
-        <div class="form-control">
-            <button class="btn" id="infoBtn">Rules of the game</button>        
-        </div>        
-    </div>    
-    <main id="drawArea">
-    </main>
-    <div id="infoPage">
+        <button class="btn" id="infoBtn">Rules of the game</button>   
+        <div id="form">            
+            <div class="form-control">
+                <label>Height</label>
+                <input type="text" id="heightInput" value="5">
+            </div>
+            <div class="form-control">
+                <label>Maximal Children</label>
+                <input type="text" id="maxChildrenInput" value="3">
+            </div>
+            <div class="form-control">
+                <button class="btn" id="drawBtn">Draw Random Tree</button>
+            </div>  
+        </div>   
+    </header>    
+    <section id="drawArea">
+    </section>
+    <section id="infoPage">
         <p>
             The Hydra Game starts with any finite rooted tree. The goal is to cut it down to its root.
         </p>
@@ -49,7 +49,7 @@
             The Hydra Game as an illustration of this theorem was invented in a paper by Kirby-Paris,
             which you can find <a href="http://www.cs.tau.ac.il/~nachumd/term/Kirbyparis.pdf" target="_blank">here</a>.
         </p>
-    </div>
+    </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script src="main.js" type="module"></script>
 </body>

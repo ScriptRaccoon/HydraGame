@@ -5,19 +5,28 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* title */
-#title {
-    font-size: 30px;
-    margin-right: 50px;
-}
+/* header */
 
-/* form */
-
-.form {
+.header {
     position: fixed;
     top: 0;
     left: 0;
     padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+#title {
+    font-size: 30px;
+}
+
+#infoBtn {
+    margin: 0px 30px;
+}
+
+/* form */
+
+#form {
     display: flex;
     align-items: center;
 }
@@ -53,6 +62,7 @@ input[type="text"] {
 
 .active-btn {
     background-color: black;
+    border: 1px solid white;
     color: white;
 }
 
@@ -98,6 +108,7 @@ input[type="text"] {
 }
 
 /* info page */
+
 #infoPage {
     display: none;
     font-size: 18px;
