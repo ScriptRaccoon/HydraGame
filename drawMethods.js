@@ -1,4 +1,4 @@
-const drawArea = $(".drawArea");
+const drawArea = $("#drawArea");
 
 export function drawLine(posA, posB, thickness = 5) {
     const length = Math.sqrt(Math.pow(posA.x - posB.x, 2) + Math.pow(posA.y - posB.y, 2));
@@ -30,7 +30,7 @@ export function drawTree(tree) {
     drawArea.html("");
     totalHeight = tree.height;
     drawSubTree(tree, tree, { x: 0, y: 0 }, 0, []);
-    $(".drawArea > *").each(function () {
+    $("#drawArea > *").each(function () {
         const left = parseInt($(this).css("left"));
         $(this).css("left", left - minx);
     });
@@ -48,6 +48,7 @@ function drawSubTree(tree, subtree, pos, depth, coordinates) {
         drawLine(pos, newPos);
         drawSubTree(tree, subtree.children[i], newPos, depth + 1, newCoordinates);
     }
+
     $("<div></div>")
         .addClass("head")
         .css({

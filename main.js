@@ -11,3 +11,9 @@ function draw() {
     const tree = Tree.getRandomTree({ height, maxChildren });
     drawTree(tree);
 }
+
+$("#infoBtn").click(() => {
+    $("#infoBtn").toggleClass("active-btn");
+    $("#drawArea").toggle();
+    $("#infoPage").toggle();
+});

@@ -1,23 +1,28 @@
 /* global styles */
 
 body {
-    margin: 0;
-    padding: 0;
     background-color: skyblue;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+/* title */
+#title {
+    font-size: 30px;
+    margin-right: 50px;
 }
 
 /* form */
 
 .form {
+    position: fixed;
+    top: 0;
+    left: 0;
     padding: 10px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 40px;
 }
 .form-control {
-    margin: 0px 20px;
+    margin-right: 50px;
 }
 input {
     font-family: inherit;
@@ -46,11 +51,21 @@ input[type="text"] {
     background-color: #eee;
 }
 
+.active-btn {
+    background-color: black;
+    color: white;
+}
+
+.active-btn:hover {
+    background-color: #444;
+    cursor: pointer;
+}
+
 /* draw area */
 
-.drawArea {
+#drawArea {
     margin-left: 100px;
-    margin-top: 50px;
+    margin-top: 100px;
     position: relative;
 }
 
@@ -78,4 +93,18 @@ input[type="text"] {
 .line {
     position: absolute;
     background-color: rgb(224, 91, 50);
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+}
+
+/* info page */
+#infoPage {
+    display: none;
+    font-size: 18px;
+    padding-top: 60px;
+}
+
+#infoPage a {
+    text-decoration: none;
+    color: purple;
 }
