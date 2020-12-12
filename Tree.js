@@ -11,7 +11,7 @@ export class Tree {
         return this.children.length;
     }
 
-    getChild(coordinates) {
+    getChildAt(coordinates) {
         if (coordinates.length === 0) {
             return this;
         }
@@ -24,7 +24,7 @@ export class Tree {
             return this.children[index];
         }
         const [index, ...rest] = coordinates;
-        return this.getChild([index]).getChild(rest);
+        return this.getChildAt([index]).getChildAt(rest);
     }
 
     convertToString() {
@@ -58,7 +58,7 @@ export class Tree {
         }
         const copy = [...coordinates];
         copy.pop();
-        const parent = this.getChild(copy);
+        const parent = this.getChildAt(copy);
         return parent;
     }
 
@@ -69,7 +69,7 @@ export class Tree {
         }
         const copy = [...coordinates];
         const index = copy.pop();
-        const parent = this.getChild(copy);
+        const parent = this.getChildAt(copy);
         parent.children.splice(index, 1);
         return this;
     }
@@ -122,5 +122,39 @@ export class Tree {
             console.log("ERROR! Options do not match.");
             return null;
         }
+    }
+
+    getDeepCopy() {
+        const root = new Tree();
+        if (this.isLeaf()) {
+            return root;
+        }
+        for (const child of this.children) {
+            root.addChild(child.getDeepCopy());
+        }
+        return root;
+    }
+
+    duplicateChildAt(coordinates, numberOfTimes) {
+        const parent = this.getParentOfChildAt(coordinates);
+        if (!parent) return;
+        const child = this.getChildAt(coordinates);
+        const index = coordinates[coordinates.length - 1];
+        for (let i = 1; i <= numberOfTimes; i++) {
+            const childCopy = child.getDeepCopy();
+            parent.children.splice(index, 0, childCopy);
+        }
+        return this;
+    }
+
+    hydraOperationAt(coordinates, numberOfTimes) {
+        const child = this.getChildAt(coordinates);
+        if (!child.isLeaf()) return;
+        const copy = [...coordinates];
+        const index = copy.pop();
+        const parent = this.getChildAt(copy);
+        if (!parent) return;
+        parent.children.splice(index, 1);
+        this.duplicateChildAt(copy, numberOfTimes);
     }
 }

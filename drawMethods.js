@@ -22,6 +22,8 @@ const depthOffset = 100;
 
 let minx, maxy, totalHeight;
 
+let duplicateNumber = 1;
+
 export function drawTree(tree) {
     minx = 0;
     maxy = 0;
@@ -44,7 +46,7 @@ function drawSubTree(tree, subtree, pos, depth, coordinates) {
         maxy = Math.max(maxy, newPos.y);
         const newCoordinates = [...coordinates, i];
         drawLine(pos, newPos);
-        drawSubTree(tree, subtree.children[i], newPos, depth + 1, [...coordinates, i]);
+        drawSubTree(tree, subtree.children[i], newPos, depth + 1, newCoordinates);
     }
     $("<div></div>")
         .addClass("head")
@@ -54,14 +56,12 @@ function drawSubTree(tree, subtree, pos, depth, coordinates) {
         })
         .appendTo(drawArea)
         .click(function () {
-            $(".logger").text("");
-            tree.removeChildAt(coordinates);
+            tree.hydraOperationAt(coordinates, duplicateNumber);
+            duplicateNumber++;
             drawTree(tree);
-        })
-        .hover(function () {
-            $(".logger").text(`coordinates: ${coordinates}`);
-        })
-        .mouseout(function () {
-            $(".logger").text("");
+            if (tree.isLeaf()) {
+                window.alert("You won!");
+                duplicateNumber = 1;
+            }
         });
 }
