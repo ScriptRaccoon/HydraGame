@@ -2,9 +2,7 @@ const drawArea = $("#drawArea");
 
 export function drawLine(posA, posB, thickness = 5) {
     const length = Math.sqrt(Math.pow(posA.x - posB.x, 2) + Math.pow(posA.y - posB.y, 2));
-    const angle = parseInt(
-        (Math.atan2(posB.y - posA.y, posB.x - posA.x) * 180) / Math.PI
-    );
+    const angle = (Math.atan2(posB.y - posA.y, posB.x - posA.x) * 180) / Math.PI;
     $("<div></div>")
         .addClass("line")
         .css({
