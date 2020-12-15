@@ -10,7 +10,6 @@ function draw() {
     const maxChildren = parseInt($("#maxChildrenInput").val());
     const tree = Tree.getRandomTree({ height, maxChildren });
     drawTree(tree);
-    console.log(tree.getNumberOfNodes());
 }
 
 $("#infoBtn").click(() => {

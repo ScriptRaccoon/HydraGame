@@ -74,8 +74,9 @@ input[type="text"] {
 /* draw area */
 
 #drawArea {
-    margin-left: 100px;
+    margin-left: 50px;
     margin-top: 100px;
+    width: 1800px;
     position: relative;
 }
 
@@ -91,8 +92,6 @@ input[type="text"] {
     transform: translate(-50%, -50%);
     position: absolute;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
     background-color: rgb(151, 48, 17);
     cursor: pointer;
     z-index: 1;
@@ -103,8 +102,7 @@ input[type="text"] {
 .line {
     position: absolute;
     background-color: rgb(224, 91, 50);
-    border-left: 1px solid white;
-    border-right: 1px solid white;
+    width: 2px;
 }
 
 /* info page */

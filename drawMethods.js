@@ -1,6 +1,6 @@
 const drawArea = $("#drawArea");
 
-export function drawLine(posA, posB, thickness = 5) {
+export function drawLine(posA, posB) {
     const length = Math.sqrt(Math.pow(posA.x - posB.x, 2) + Math.pow(posA.y - posB.y, 2));
     const angle = (Math.atan2(posB.y - posA.y, posB.x - posA.x) * 180) / Math.PI;
     $("<div></div>")
@@ -8,7 +8,6 @@ export function drawLine(posA, posB, thickness = 5) {
         .css({
             transformOrigin: "top left",
             transform: `rotate(${angle - 90}deg) translateX(-50%)`,
-            width: thickness + "px",
             height: length + "px",
             left: posA.x,
             top: posA.y,
@@ -16,44 +15,56 @@ export function drawLine(posA, posB, thickness = 5) {
         .appendTo(drawArea);
 }
 
-const depthOffset = 100;
-
-let minx, maxy, totalHeight;
+const offsetY = 100;
+const totalWidth = 1800;
+let height;
 
 let duplicateNumber = 1;
 
 export function drawTree(tree) {
-    minx = 0;
-    maxy = 0;
     drawArea.html("");
-    totalHeight = tree.height;
-    $("#heightSpan").text(totalHeight);
+    height = tree.height;
+    $("#heightSpan").text(height);
     $("#nodeSpan").text(tree.numberOfNodes);
-    drawSubTree(tree, tree, { x: 0, y: 0 }, 0, []);
-    $("#drawArea > *").each(function () {
-        const left = parseInt($(this).css("left"));
-        $(this).css("left", left - minx);
-    });
-    $("<div></div>").addClass("block").css("top", maxy).appendTo(drawArea);
+    drawSubTree(tree, tree, 0, [], { x: totalWidth / 2, y: 0 }, [0, totalWidth]);
+    $("<div></div>")
+        .addClass("block")
+        .css("top", height * offsetY)
+        .appendTo(drawArea);
 }
 
-function drawSubTree(tree, subtree, pos, depth, coordinates) {
-    const childNr = subtree.children.length;
-    for (let i = 0; i < childNr; i++) {
-        const offset = 70 * (i - (childNr - 1) / 2) * (totalHeight - depth);
-        const newPos = { x: pos.x + offset, y: pos.y + depthOffset };
-        minx = Math.min(minx, newPos.x);
-        maxy = Math.max(maxy, newPos.y);
+function drawSubTree(tree, subtree, depth, coordinates, rootPos, xArea) {
+    const [a, b] = xArea;
+    const childCount = subtree.children.length;
+    for (let i = 0; i < childCount; i++) {
+        const childxArea = [
+            a + (i * (b - a)) / childCount,
+            a + ((i + 1) * (b - a)) / childCount,
+        ];
+        const childPos = {
+            x: (childxArea[0] + childxArea[1]) / 2,
+            y: rootPos.y + offsetY / (depth + 1),
+        };
         const newCoordinates = [...coordinates, i];
-        drawLine(pos, newPos);
-        drawSubTree(tree, subtree.children[i], newPos, depth + 1, newCoordinates);
+        drawLine(rootPos, childPos, 2);
+        drawSubTree(
+            tree,
+            subtree.children[i],
+            depth + 1,
+            newCoordinates,
+            childPos,
+            childxArea
+        );
     }
 
+    const headSize = Math.max(2, 10 - depth);
     $("<div></div>")
         .addClass("head")
         .css({
-            left: pos.x,
-            top: pos.y,
+            left: rootPos.x,
+            top: rootPos.y,
+            width: headSize + "px",
+            height: headSize + "px",
         })
         .appendTo(drawArea)
         .click(function () {
