@@ -27,6 +27,8 @@ export function drawTree(tree) {
     maxy = 0;
     drawArea.html("");
     totalHeight = tree.height;
+    $("#heightSpan").text(totalHeight);
+    $("#nodeSpan").text(tree.numberOfNodes);
     drawSubTree(tree, tree, { x: 0, y: 0 }, 0, []);
     $("#drawArea > *").each(function () {
         const left = parseInt($(this).css("left"));

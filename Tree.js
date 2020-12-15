@@ -7,6 +7,14 @@ export class Tree {
         }
     }
 
+    get numberOfNodes() {
+        let s = 1;
+        for (const child of this.children) {
+            s += child.numberOfNodes;
+        }
+        return s;
+    }
+
     get childrenNumber() {
         return this.children.length;
     }
