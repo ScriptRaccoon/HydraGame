@@ -14,5 +14,5 @@ function draw() {
 
 $("#infoBtn").click(() => {
     $("#infoBtn").toggleClass("active-btn");
-    $("#drawArea, #infoPage, #form").toggle();
+    $("#drawArea, #infoPage, #form, #stats").toggle();
 });

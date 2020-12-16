@@ -1,5 +1,10 @@
 /* global styles */
 
+:root {
+    --line-color: rgb(167, 56, 23);
+    --head-color: #5a382b;
+}
+
 body {
     background-color: skyblue;
     font-family: Arial, Helvetica, sans-serif;
@@ -14,6 +19,8 @@ body {
     padding: 10px;
     display: flex;
     align-items: center;
+    background-color: skyblue;
+    z-index: 2;
 }
 
 #title {
@@ -92,16 +99,17 @@ input[type="text"] {
     transform: translate(-50%, -50%);
     position: absolute;
     border-radius: 50%;
-    background-color: rgb(151, 48, 17);
+    background-color: var(--head-color);
+    border: 1px solid var(--line-color);
     cursor: pointer;
     z-index: 1;
 }
 .head:hover {
-    border: 2px solid white;
+    border: 1px solid white;
 }
 .line {
     position: absolute;
-    background-color: rgb(224, 91, 50);
+    background-color: var(--line-color);
     width: 2px;
 }
 

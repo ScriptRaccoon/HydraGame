@@ -15,22 +15,21 @@ export function drawLine(posA, posB) {
         .appendTo(drawArea);
 }
 
-const offsetY = 100;
+const offsetY = 300;
 const totalWidth = 1800;
 let height;
+let maxy = 0;
 
 let duplicateNumber = 1;
 
 export function drawTree(tree) {
+    maxy = 0;
     drawArea.html("");
     height = tree.height;
     $("#heightSpan").text(height);
     $("#nodeSpan").text(tree.numberOfNodes);
     drawSubTree(tree, tree, 0, [], { x: totalWidth / 2, y: 0 }, [0, totalWidth]);
-    $("<div></div>")
-        .addClass("block")
-        .css("top", height * offsetY)
-        .appendTo(drawArea);
+    $("<div></div>").addClass("block").css("top", maxy).appendTo(drawArea);
 }
 
 function drawSubTree(tree, subtree, depth, coordinates, rootPos, xArea) {
@@ -45,6 +44,7 @@ function drawSubTree(tree, subtree, depth, coordinates, rootPos, xArea) {
             x: (childxArea[0] + childxArea[1]) / 2,
             y: rootPos.y + offsetY / (depth + 1),
         };
+        maxy = Math.max(childPos.y, maxy);
         const newCoordinates = [...coordinates, i];
         drawLine(rootPos, childPos, 2);
         drawSubTree(
